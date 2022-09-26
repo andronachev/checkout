@@ -10,8 +10,7 @@ namespace Checkout.Core.Events
     {
         public int AggregateId { get; protected set; }
         public string EventType { get; protected set; }
-    
-        public DateTime EventDateTimeUtc { get; set; } = DateTime.UtcNow;
+        public DateTime EventDateTimeUtc { get; private set; } = DateTime.UtcNow;
     }
 
 
