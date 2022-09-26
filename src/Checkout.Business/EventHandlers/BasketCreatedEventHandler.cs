@@ -1,5 +1,6 @@
 ﻿using Checkout.Core.Aggregates.Basket;
 using Checkout.Core.Events.Basket;
+using Checkout.Core.Events.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.Business.EventHandlers
 {
-    public class BasketCreatedEventHandler
+    public class BasketCreatedEventHandler : IEventHandler<BasketCreated>
     {
         private readonly IBasketReadRepository _repository;
         public BasketCreatedEventHandler(IBasketReadRepository repository)
@@ -18,7 +19,7 @@ namespace Checkout.Business.EventHandlers
 
         public async Task Handle(BasketCreated @event)
         {
-            //write in SQL, wherever needed, a read projection etc
+            await _repository.RegisterBasketList(@event.AggregateId, @event.Customer, @event.PaysVat);
         }
     }
 }

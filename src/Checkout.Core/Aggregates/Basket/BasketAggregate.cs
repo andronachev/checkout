@@ -23,7 +23,7 @@ namespace Checkout.Core.Aggregates.Basket
 
         public void CreateBasket(string customer, bool paysVat)
         {
-            var @event = new BasketCreated(customer, paysVat);
+            var @event = new BasketCreated(Id, customer, paysVat);
 
             this.PendingEventsInternal.Add(@event);
 

@@ -8,9 +8,10 @@ namespace Checkout.Core.Events.Basket
 {
     public class BasketCreated : EventBase
     {
-        public BasketCreated(string customer, bool paysVat)
+        public BasketCreated(Guid aggregateId, string customer, bool paysVat)
         {
             EventType = EventTypes.BasketCreated;
+            AggregateId = aggregateId;
             Customer = customer;
             PaysVat = paysVat;  
         }

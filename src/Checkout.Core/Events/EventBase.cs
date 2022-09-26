@@ -8,7 +8,8 @@ namespace Checkout.Core.Events
 {
     public abstract class EventBase
     {
-        public string EventType { get; set; }
+        public Guid AggregateId { get; protected set; }
+        public string EventType { get; protected set; }
     
         public DateTime EventDateTimeUtc { get; set; } = DateTime.UtcNow;
     }
