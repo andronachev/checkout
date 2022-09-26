@@ -1,3 +1,4 @@
+using Checkout.Core.Aggregates.Basket.Read;
 using Checkout.Core.Aggregates.Basket.Services;
 using Checkout.Infrastructure.Common.Data;
 using Checkout.Infrastructure.Common.Data.Entities;
@@ -37,6 +38,14 @@ namespace Checkout.Controllers
         {
             var baskets = await _dbContext.Baskets.ToArrayAsync();
             return baskets;
+        }
+
+        [HttpGet]
+        [Route("/baskets/{id}")]
+        public async Task<BasketSummary> GetBasket(int id)
+        {
+            var basketSummary = await _basketService.GetBasketSummary(id);
+            return basketSummary;
         }
 
         [HttpPost]
