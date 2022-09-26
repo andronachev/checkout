@@ -13,33 +13,89 @@ namespace Checkout.Core.Aggregates.Basket
         public BasketAggregate()
         {
             Id = Guid.NewGuid();
-            this.EventHandlers.Add(EventTypes.BasketCreated, (@event) => { this.OnCreated(@event as BasketCreated); });
-            this.EventHandlers.Add(EventTypes.BasketUpdated, (@event) => { this.OnUpdated(@event); });
-            this.EventHandlers.Add(EventTypes.BasketClosed, (@event) => { this.OnClosed(@event); });
+            this.EventReconstitutor.Add(EventTypes.BasketCreated, (@event) => { this.OnCreated(@event as BasketCreated); });
+            this.EventReconstitutor.Add(EventTypes.BasketUpdated, (@event) => { this.OnUpdated(@event as BasketUpdated); });
+            this.EventReconstitutor.Add(EventTypes.BasketStatusUpdated, (@event) => { this.OnStatusUpdated(@event as BasketStatusUpdated); });
+        }
+
+        public BasketAggregate(EventBase[] @events) : this()
+        {
+            Reconstitute(@events);
+        }
+
+        private void Reconstitute(EventBase[] events)
+        {
+            foreach(var @event in events)
+            {
+                if (this.EventReconstitutor.ContainsKey(@event.EventType))
+                {
+                    this.EventReconstitutor[@event.EventType](@event);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Event reconstituter not implemented, canot reconstitute/rehydrate aggregate");
+                }
+            }
         }
 
         public string Customer { get; set; }
         public bool PaysVat { get; set; }
+        public string Status { get; set; }
+
+        public List<ArticleValueObj> Articles { get; set; } = new();
 
         public void CreateBasket(string customer, bool paysVat)
         {
-            var @event = new BasketCreated(Id, customer, paysVat);
+            var @event = new BasketCreated(Id, customer, paysVat, "Open");
 
             this.PendingEventsInternal.Add(@event);
 
             this.OnCreated(@event);
         }
 
+        public void UpdateStatus(string status)
+        {
+            var @event = new BasketStatusUpdated(Id, status);
+
+            this.PendingEventsInternal.Add(@event);
+
+            this.OnStatusUpdated(@event);
+        }
+
+        public void AddArticleLine(string article, int price)
+        {
+            var @event = new BasketUpdated(Id, article, price);
+
+            this.PendingEventsInternal.Add(@event);
+
+            this.OnUpdated(@event);
+        }
+
         private void OnCreated(BasketCreated @event)
         {
+            this.Id = @event.AggregateId;
             this.Customer = @event.Customer;
             this.PaysVat = @event.PaysVat;
+            this.Status = @event.Status;
         }
-        private void OnUpdated(EventBase @event)
+        private void OnUpdated(BasketUpdated @event)
         {
+            Articles.Add(new ArticleValueObj()
+            {
+                Article = @event.Article,
+                Price = @event.Price
+            });
         }
-        private void OnClosed(EventBase @event)
+        private void OnStatusUpdated(BasketStatusUpdated @event)
         {
+            this.Status = @event.Status;
         }
+    }
+
+    public class ArticleValueObj
+    {
+        public string Article { get; set; }
+
+        public int Price { get; set; }
     }
 }

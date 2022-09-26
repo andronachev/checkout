@@ -23,6 +23,9 @@ builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IBasketReadRepository, BasketSqlReadRepository>();
 builder.Services.AddScoped<IEventHandler<BasketCreated>, BasketCreatedEventHandler>();
 
+builder.Services.AddScoped<IEventHandler<BasketUpdated>, BasketUpdatedEventHandler>();
+builder.Services.AddScoped<IEventHandler<BasketStatusUpdated>, BasketStatusUpdatedEventHandler>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

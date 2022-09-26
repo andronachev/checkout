@@ -1,10 +1,11 @@
 using Checkout.Core.Aggregates.Basket.Services;
+using Checkout.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Checkout.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/[action]")]
     public class BasketController : ControllerBase
     {
         private readonly ILogger<BasketController> _logger;
@@ -17,15 +18,27 @@ namespace Checkout.Controllers
             _basketService = basketService;
         }
 
-        [HttpGet(Name = "GetBaskets")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpPost]
+        [Route("/baskets")]
+        public async Task<Guid> Baskets(BasketDto basket)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55)
-            })
-            .ToArray();
+            Guid basketId = await _basketService.CreateBasket(basket.Customer, basket.PaysVat);
+            return basketId;
+        }
+
+        [HttpPost]
+        [Route("/baskets/{id}/article-line")]
+        public async Task ArticleLine(Guid id, [FromBody] ArticleDto article)
+        {
+            await _basketService.AddArticleLine(id, article.Article, article.Price);
+        }
+
+
+        [HttpPost]
+        [Route("/baskets/{id}")]
+        public async Task UpdateStatus(Guid id, [FromBody] UpdateStatusDto updateStatusDto)
+        {
+            await _basketService.UpdateStatus(id, updateStatusDto.Status);
         }
     }
 }

@@ -23,6 +23,18 @@ namespace Checkout.Infrastructure.Sync
                         await handler.Handle(@event as BasketCreated);
                         break;
                     }
+                case "BasketUpdated":
+                    {
+                        var handler = _serviceProvider.GetService(typeof(IEventHandler<BasketUpdated>)) as IEventHandler<BasketUpdated>;
+                        await handler.Handle(@event as BasketUpdated);
+                        break;
+                    }
+                case "BasketStatusUpdated":
+                    {
+                        var handler = _serviceProvider.GetService(typeof(IEventHandler<BasketStatusUpdated>)) as IEventHandler<BasketStatusUpdated>;
+                        await handler.Handle(@event as BasketStatusUpdated);
+                        break;
+                    }
                 default:
                     {
                         break;

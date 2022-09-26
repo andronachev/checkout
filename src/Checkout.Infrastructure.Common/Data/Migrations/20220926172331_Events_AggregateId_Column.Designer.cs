@@ -4,6 +4,7 @@ using Checkout.Infrastructure.Common.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Checkout.Infrastructure.Common.Data.Migrations
 {
     [DbContext(typeof(CheckoutDbContext))]
-    partial class CheckoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220926172331_Events_AggregateId_Column")]
+    partial class Events_AggregateId_Column
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

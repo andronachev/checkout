@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Checkout.Business\Checkout.Business.csproj" />
     <ProjectReference Include="..\Checkout.Core\Checkout.Core.csproj" />
     <ProjectReference Include="..\Checkout.Infrastructure.Async\Checkout.Infrastructure.Async.csproj" />

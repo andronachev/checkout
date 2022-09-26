@@ -27,5 +27,12 @@ namespace Checkout.Infrastructure.Common
 
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateBasketStatus(Guid id, string status)
+        {
+            var basket = _dbContext.Baskets.Find(id);
+            basket.Status = status;
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
