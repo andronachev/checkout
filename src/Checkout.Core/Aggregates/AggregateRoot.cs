@@ -11,5 +11,7 @@ namespace Checkout.Core.Aggregates
     {
         public Guid Id { get; set; }
         public Dictionary<string, Action<EventBase>> EventHandlers { get; set; } = new();
+        public EventBase[] PendingEvents { get { return this.PendingEventsInternal.ToArray(); } }
+        protected List<EventBase> PendingEventsInternal { get; } = new();
     }
 }

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Checkout.Core.Events.Interfaces
 {
-    public interface IEventStore
+    public interface IEventHandler<T> where T: EventBase
     {
-        Task Store(EventBase[] @events);
-
-        Task<EventBase[]> GetAllEventsByAggregateId(Guid aggregateId);  
+        Task Handle(T @event);
     }
 }
