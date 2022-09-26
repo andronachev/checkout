@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Checkout.Core\Checkout.Core.csproj" />
+  </ItemGroup>
+
 </Project>
