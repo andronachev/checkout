@@ -10,11 +10,10 @@ namespace Checkout.Core.Aggregates.Basket
 {
     public class BasketAggregate : AggregateRoot
     {
-        public BasketAggregate()
+        public BasketAggregate(): base()
         {
-            Id = Guid.NewGuid();
             this.EventReconstitutor.Add(EventTypes.BasketCreated, (@event) => { this.OnCreated(@event as BasketCreated); });
-            this.EventReconstitutor.Add(EventTypes.BasketUpdated, (@event) => { this.OnUpdated(@event as BasketUpdated); });
+            this.EventReconstitutor.Add(EventTypes.BaskedArticleAdded, (@event) => { this.OnArticleAdded(@event as BasketArticleAdded); });
             this.EventReconstitutor.Add(EventTypes.BasketStatusUpdated, (@event) => { this.OnStatusUpdated(@event as BasketStatusUpdated); });
         }
 
@@ -64,11 +63,11 @@ namespace Checkout.Core.Aggregates.Basket
 
         public void AddArticleLine(string article, int price)
         {
-            var @event = new BasketUpdated(Id, article, price);
+            var @event = new BasketArticleAdded(Id, article, price);
 
             this.PendingEventsInternal.Add(@event);
 
-            this.OnUpdated(@event);
+            this.OnArticleAdded(@event);
         }
 
         private void OnCreated(BasketCreated @event)
@@ -78,7 +77,7 @@ namespace Checkout.Core.Aggregates.Basket
             this.PaysVat = @event.PaysVat;
             this.Status = @event.Status;
         }
-        private void OnUpdated(BasketUpdated @event)
+        private void OnArticleAdded(BasketArticleAdded @event)
         {
             Articles.Add(new ArticleValueObj()
             {

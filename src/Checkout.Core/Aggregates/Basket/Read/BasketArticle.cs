@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.Core.Aggregates.Basket.Read
 {
-    public class ArticleDTO
+    public class BasketArticle
     {
         public string Article { get; set; }
 

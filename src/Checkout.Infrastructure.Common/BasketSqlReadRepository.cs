@@ -13,7 +13,7 @@ namespace Checkout.Infrastructure.Common
             _dbContext = dbContext;
         }
 
-        public async Task RegisterBasketList(Guid id, string customer, bool paysVat)
+        public async Task RegisterBasketList(int id, string customer, bool paysVat)
         {
             var basket = new Basket()
             {
@@ -28,7 +28,7 @@ namespace Checkout.Infrastructure.Common
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateBasketStatus(Guid id, string status)
+        public async Task UpdateBasketStatus(int id, string status)
         {
             var basket = _dbContext.Baskets.Find(id);
             basket.Status = status;

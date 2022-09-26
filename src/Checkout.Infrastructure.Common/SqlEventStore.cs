@@ -21,7 +21,7 @@ namespace Checkout.Infrastructure.Common
             _dbContext = dbContext;
         }
 
-        public async Task<EventBase[]> GetAllEventsByAggregateId(Guid aggregateId)
+        public async Task<EventBase[]> GetAllEventsByAggregateId(int aggregateId)
         {
             var storedEvents = await _dbContext.Events.Where(e => e.AggregateId == aggregateId).ToListAsync();
             List<EventBase> coreEvents = new List<EventBase>();

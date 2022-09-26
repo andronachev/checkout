@@ -22,8 +22,7 @@ builder.Services.AddScoped<IEventStore, SqlEventStore>();
 builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IBasketReadRepository, BasketSqlReadRepository>();
 builder.Services.AddScoped<IEventHandler<BasketCreated>, BasketCreatedEventHandler>();
-
-builder.Services.AddScoped<IEventHandler<BasketUpdated>, BasketUpdatedEventHandler>();
+builder.Services.AddScoped<IEventHandler<BasketArticleAdded>, BasketUpdatedEventHandler>();
 builder.Services.AddScoped<IEventHandler<BasketStatusUpdated>, BasketStatusUpdatedEventHandler>();
 
 builder.Services.AddControllers();

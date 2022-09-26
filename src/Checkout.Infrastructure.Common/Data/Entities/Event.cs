@@ -10,7 +10,7 @@ namespace Checkout.Infrastructure.Common.Data.Entities
     {
         public Guid Id { get; set; }
      
-        public Guid AggregateId { get; set; }
+        public int AggregateId { get; set; }
         public string EventType { get; set; }
         public DateTime EventDateTimeUtc { get; set; }
 

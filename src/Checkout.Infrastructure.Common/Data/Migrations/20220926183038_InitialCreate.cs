@@ -13,7 +13,7 @@ namespace Checkout.Infrastructure.Common.Data.Migrations
                 name: "Baskets",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Customer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaysVat = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -28,6 +28,7 @@ namespace Checkout.Infrastructure.Common.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AggregateId = table.Column<int>(type: "int", nullable: false),
                     EventType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EventDateTimeUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EventPayload = table.Column<string>(type: "nvarchar(max)", nullable: false)

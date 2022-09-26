@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Checkout.Infrastructure.Common.Data.Migrations
 {
     [DbContext(typeof(CheckoutDbContext))]
-    [Migration("20220926170245_InitialCreate")]
+    [Migration("20220926183038_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,9 +26,8 @@ namespace Checkout.Infrastructure.Common.Data.Migrations
 
             modelBuilder.Entity("Checkout.Infrastructure.Common.Data.Entities.Basket", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Customer")
                         .IsRequired()
@@ -51,6 +50,9 @@ namespace Checkout.Infrastructure.Common.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AggregateId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EventDateTimeUtc")
                         .HasColumnType("datetime2");

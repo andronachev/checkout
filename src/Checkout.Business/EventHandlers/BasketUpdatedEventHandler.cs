@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.Business.EventHandlers
 {
-    public class BasketUpdatedEventHandler : IEventHandler<BasketUpdated>
+    public class BasketUpdatedEventHandler : IEventHandler<BasketArticleAdded>
     {
         private readonly IBasketReadRepository _repository;
         public BasketUpdatedEventHandler(IBasketReadRepository repository)
@@ -17,7 +17,7 @@ namespace Checkout.Business.EventHandlers
             _repository = repository;
         }
 
-        public async Task Handle(BasketUpdated @event)
+        public async Task Handle(BasketArticleAdded @event)
         {
             //maybe save the list of articles in SQL
         }

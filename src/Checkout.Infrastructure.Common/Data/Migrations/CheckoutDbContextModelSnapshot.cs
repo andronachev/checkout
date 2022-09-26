@@ -24,9 +24,8 @@ namespace Checkout.Infrastructure.Common.Data.Migrations
 
             modelBuilder.Entity("Checkout.Infrastructure.Common.Data.Entities.Basket", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Customer")
                         .IsRequired()
@@ -50,8 +49,8 @@ namespace Checkout.Infrastructure.Common.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AggregateId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("AggregateId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EventDateTimeUtc")
                         .HasColumnType("datetime2");

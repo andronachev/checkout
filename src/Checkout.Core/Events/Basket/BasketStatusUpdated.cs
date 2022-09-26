@@ -8,7 +8,7 @@ namespace Checkout.Core.Events.Basket
 {
     public class BasketStatusUpdated : EventBase
     {
-        public BasketStatusUpdated(Guid aggregateId, string status)
+        public BasketStatusUpdated(int aggregateId, string status)
         {
             EventType = EventTypes.BasketStatusUpdated;
             AggregateId = aggregateId;

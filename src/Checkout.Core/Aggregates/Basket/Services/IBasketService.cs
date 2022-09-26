@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Checkout.Core.Aggregates.Basket.Read;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace Checkout.Core.Aggregates.Basket.Services
 {
     public interface IBasketService
     {
-        Task<Guid> CreateBasket(string customer, bool paysVat);
+        Task<int> CreateBasket(string customer, bool paysVat);
 
-        Task AddArticleLine(Guid basketId, string article, int price);
+        Task AddArticleLine(int basketId, string article, int price);
 
-        Task UpdateStatus(Guid basketId, string status);
+        Task UpdateStatus(int basketId, string status);
+
+        Task<BasketSummary> GetBasketSummary(int basketId); 
     }
 }
