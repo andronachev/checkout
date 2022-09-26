@@ -10,6 +10,6 @@ namespace Checkout.Core.Events.Interfaces
     {
         Task Store(EventBase[] @events);
 
-        Task<EventBase[]> GetAllEventsByAggregateId(Guid aggregateId);  
+        Task<EventBase[]> GetAllEventsByAggregateId(int aggregateId);  
     }
 }

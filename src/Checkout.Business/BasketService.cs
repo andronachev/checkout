@@ -17,7 +17,7 @@ namespace Checkout.Business
             _eventPublisher = eventPublisher;   
         }
 
-        public async Task UpdateStatus(Guid basketId, string status)
+        public async Task UpdateStatus(int basketId, string status)
         {
             var allEvents = await _eventStore.GetAllEventsByAggregateId(basketId);
 
@@ -28,7 +28,7 @@ namespace Checkout.Business
             await StoreAndPublish(aggregate);
         }
 
-        public async Task AddArticleLine(Guid basketId, string article, int price)
+        public async Task AddArticleLine(int basketId, string article, int price)
         {
             var allEvents = await _eventStore.GetAllEventsByAggregateId(basketId);
 
@@ -39,7 +39,7 @@ namespace Checkout.Business
             await StoreAndPublish(aggregate);
         }
 
-        public async Task<Guid> CreateBasket(string customer, bool paysVat)
+        public async Task<int> CreateBasket(string customer, bool paysVat)
         {
             var newAggregate = new BasketAggregate();
 

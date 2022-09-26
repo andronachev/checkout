@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Checkout.Core.Events.Basket
 {
-    public class BasketUpdated : EventBase
+    public class BasketArticleAdded : EventBase
     {
-        public BasketUpdated(Guid aggregateId, string article, int price)
+        public BasketArticleAdded(int aggregateId, string article, int price)
         {
-            EventType = EventTypes.BasketUpdated;
+            EventType = EventTypes.BaskedArticleAdded;
             AggregateId = aggregateId;
             Article = article;
             Price = price;  
