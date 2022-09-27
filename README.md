@@ -16,8 +16,10 @@ Architecture:
 
 # Remarks 
 
+- BasketAggregate is single source of thruth 
+- read model in SQL (Baskets table)
 - event publishing/handling implemented synchronously in memory, however the solution proposed is easily extensible and implementations using Kafka, service bus etc could be added  
-- event store implemented using SQL for convenience, would otherwise use a NoSQL DB 
+- event store (write model) implemented using SQL for convenience (Events table), would otherwise use a NoSQL DB 
 - solution would be more fragmented based on the infrastructure choice, example Infrastructure.NoSql or Infrastructure.Write.... for the event store
 - repository not unit tested due to DbContext dependency (not easily testable) however in the past used researched and/or implemented several approaches: 
        
