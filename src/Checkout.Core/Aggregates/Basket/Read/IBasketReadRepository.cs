@@ -8,7 +8,7 @@ namespace Checkout.Core.Aggregates.Basket
 {
     public interface IBasketReadRepository
     {
-        Task RegisterBasketList(int id, string customer, bool paysVat);
+        Task RegisterBasketList(int id, string customer, bool paysVat, string status);
         Task UpdateBasketStatus(int id, string status);
     }
 }

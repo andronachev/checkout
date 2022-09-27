@@ -13,7 +13,15 @@ namespace Checkout.Infrastructure.Sync
             _serviceProvider = serviceProvider; 
         }
 
-        public async Task Publish(EventBase @event)
+        public async Task Publish(EventBase[] @events)
+        {
+            foreach(var @event in @events)
+            {
+                await Publish(@event);
+            }
+        }
+
+        private async Task Publish(EventBase @event)
         {
             switch (@event.EventType)
             {

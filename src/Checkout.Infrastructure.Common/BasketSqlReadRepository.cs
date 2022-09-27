@@ -13,14 +13,14 @@ namespace Checkout.Infrastructure.Common
             _dbContext = dbContext;
         }
 
-        public async Task RegisterBasketList(int id, string customer, bool paysVat)
+        public async Task RegisterBasketList(int id, string customer, bool paysVat, string status)
         {
             var basket = new Basket()
             {
                 Id = id,
                 Customer = customer,
                 PaysVat = paysVat,
-                Status = "Open"
+                Status = status
             };
 
             _dbContext.Baskets.Add(basket);

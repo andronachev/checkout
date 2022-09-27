@@ -19,7 +19,7 @@ namespace Checkout.Business.EventHandlers
 
         public async Task Handle(BasketCreated @event)
         {
-            await _repository.RegisterBasketList(@event.AggregateId, @event.Customer, @event.PaysVat);
+            await _repository.RegisterBasketList(@event.AggregateId, @event.Customer, @event.PaysVat, @event.Status);
         }
     }
 }
