@@ -7,21 +7,15 @@ using Checkout.Core.Events.Interfaces;
 
 namespace Checkout.Business
 {
-    public class BasketService : IBasketService
+    public class BasketService : ServiceBase, IBasketService
     {
-        private readonly IEventStore _eventStore;
-        private readonly IEventPublisher _eventPublisher;
-        public BasketService(IEventStore eventStore, IEventPublisher eventPublisher)
+        public BasketService(IEventStore eventStore, IEventPublisher eventPublisher): base(eventStore, eventPublisher)
         {
-            _eventStore = eventStore;
-            _eventPublisher = eventPublisher;   
         }
 
         public async Task UpdateStatus(int basketId, string status)
         {
-            var allEvents = await _eventStore.GetAllEventsByAggregateId(basketId);
-
-            var aggregate = new BasketAggregate(allEvents);
+            var aggregate = await GetAggregate<BasketAggregate>(basketId);
 
             aggregate.UpdateStatus(status);
             
@@ -30,9 +24,7 @@ namespace Checkout.Business
 
         public async Task AddArticleLine(int basketId, string article, int price)
         {
-            var allEvents = await _eventStore.GetAllEventsByAggregateId(basketId);
-
-            var aggregate = new BasketAggregate(allEvents);
+            var aggregate = await GetAggregate<BasketAggregate>(basketId);
 
             aggregate.AddArticleLine(article, price);
 
@@ -41,40 +33,27 @@ namespace Checkout.Business
 
         public async Task<int> CreateBasket(string customer, bool paysVat)
         {
-            var newAggregate = new BasketAggregate();
+            var newAggregate = GetNewAggregate<BasketAggregate>();
 
             newAggregate.CreateBasket(customer, paysVat);
 
             await StoreAndPublish(newAggregate);
 
             return newAggregate.Id;
-          
-        }
-
-        private async Task StoreAndPublish(AggregateRoot aggregate)
-        {
-            await _eventStore.Store(aggregate.PendingEvents.ToArray());
-            foreach (var @event in aggregate.PendingEvents)
-            {
-                await _eventPublisher.Publish(@event);
-            }
         }
 
         public async Task<BasketSummary> GetBasketSummary(int basketId)
         {
-            var allEvents = await _eventStore.GetAllEventsByAggregateId(basketId);
-
-            var aggregate = new BasketAggregate(allEvents);
+            var aggregate = await GetAggregate<BasketAggregate>(basketId);
 
             var summary = new BasketSummary();
-
             summary.Id = aggregate.Id;
             summary.Customer = aggregate.Customer;
             summary.PaysVAT = aggregate.PaysVat;
             summary.Status = aggregate.Status;
             summary.Articles = aggregate.Articles.Select(a => new BasketArticle() { Article = a.Article, Price = a.Price }).ToList();
 
-            summary.TotalNet = summary.Articles.Sum(a => a.Price);
+            summary.TotalNet = aggregate.Articles.Sum(a => a.Price);
             summary.TotalGross = aggregate.PaysVat ? (summary.TotalNet * (decimal)1.1) : summary.TotalNet;
 
             return summary;

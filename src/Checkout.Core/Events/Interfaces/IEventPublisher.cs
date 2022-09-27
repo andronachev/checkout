@@ -8,6 +8,6 @@ namespace Checkout.Core.Events.Interfaces
 {
     public interface IEventPublisher
     {
-        Task Publish(EventBase @event);
+        Task Publish(EventBase[] @events);
     }
 }

@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout", "Checkout\Checkout.csproj", "{EB2D467B-3215-4A6E-BAF0-9687DB6048EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout", "Checkout\Checkout.csproj", "{EB2D467B-3215-4A6E-BAF0-9687DB6048EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Core", "Checkout.Core\Checkout.Core.csproj", "{5BD37F06-BAB2-442E-8360-FC375EA01B6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Core", "Checkout.Core\Checkout.Core.csproj", "{5BD37F06-BAB2-442E-8360-FC375EA01B6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Infrastructure.Sync", "Checkout.Infrastructure.Sync\Checkout.Infrastructure.Sync.csproj", "{13CF7286-FD0B-4CE5-BC83-A99DACA17BD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Infrastructure.Sync", "Checkout.Infrastructure.Sync\Checkout.Infrastructure.Sync.csproj", "{13CF7286-FD0B-4CE5-BC83-A99DACA17BD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Business", "Checkout.Business\Checkout.Business.csproj", "{F0D3AB50-E466-4D93-9FCE-E11961A01C05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Business", "Checkout.Business\Checkout.Business.csproj", "{F0D3AB50-E466-4D93-9FCE-E11961A01C05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Infrastructure.Common", "Checkout.Infrastructure.Common\Checkout.Infrastructure.Common.csproj", "{5A7796EC-DFD4-4D82-A195-A6B6A81F804D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Infrastructure.Common", "Checkout.Infrastructure.Common\Checkout.Infrastructure.Common.csproj", "{5A7796EC-DFD4-4D82-A195-A6B6A81F804D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Infrastructure.Async", "Checkout.Infrastructure.Async\Checkout.Infrastructure.Async.csproj", "{4F951829-E9DD-4EC8-9604-2D649E2874AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Infrastructure.Async", "Checkout.Infrastructure.Async\Checkout.Infrastructure.Async.csproj", "{4F951829-E9DD-4EC8-9604-2D649E2874AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.UnitTests", "Checkout.UnitTests\Checkout.UnitTests.csproj", "{B7CB273F-45DE-4509-992B-864BCDBCDC68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{4F951829-E9DD-4EC8-9604-2D649E2874AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F951829-E9DD-4EC8-9604-2D649E2874AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F951829-E9DD-4EC8-9604-2D649E2874AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7CB273F-45DE-4509-992B-864BCDBCDC68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CB273F-45DE-4509-992B-864BCDBCDC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CB273F-45DE-4509-992B-864BCDBCDC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CB273F-45DE-4509-992B-864BCDBCDC68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
